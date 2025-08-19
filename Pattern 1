@@ -1,0 +1,14 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner abc = new Scanner(System.in);
+        int a= abc.nextInt();
+        int i,j;
+        for(i=a;i>=0;i--){
+            for(j=i;j<a;j++){
+                System.out.print("*");
+        }
+            System.out.println();
+        }
+    }
+}

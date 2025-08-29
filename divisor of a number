@@ -1,0 +1,24 @@
+import java.util.*;
+class Solution {
+    public int[] divisors(int n) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                list.add(i);
+            }
+        }
+        int[] divlist = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            divlist[i] = list.get(i);
+        }
+        return divlist;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        Solution sol = new Solution();
+        int[] divisors = sol.divisors(num);
+        System.out.println(Arrays.toString(divisors));
+    }
+}

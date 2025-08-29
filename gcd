@@ -1,0 +1,17 @@
+class Solution {
+    public int GCD(int n1, int n2) {
+        while (n2 != 0) {
+            int temp = n2;
+            n2 = n1 % n2;
+            n1 = temp;
+        }
+        return n1;
+    }
+    public static void main(String[] args) {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int num1 = sc.nextInt();
+        int num2 = sc.nextInt();
+        Solution sol = new Solution();
+        System.out.println(sol.GCD(num1, num2));
+    }
+}

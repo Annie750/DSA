@@ -1,0 +1,30 @@
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> countFrequencies(int[] nums) {
+        int[] hash = new int[13];
+        for (int i = 0; i < nums.length; i++) {
+            hash[nums[i]]++;
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < hash.length; i++) {
+            if (hash[i] > 0) {
+                result.add(Arrays.asList(i, hash[i]));
+            }
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Solution sol = new Solution();
+        List<List<Integer>> freqList = sol.countFrequencies(arr);
+        for (List<Integer> pair : freqList) {
+            System.out.println("Number: " + pair.get(0) + ", Frequency: " + pair.get(1));
+        }
+    }
+}

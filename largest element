@@ -1,0 +1,28 @@
+import java.util.*;
+class Solution {
+    public int largestElement(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            for(int j=0;j<nums.length-i-1;j++){
+                if(nums[j]>nums[j+1]){
+                    int temp= nums[j];
+                    nums[j]=nums[j+1];
+                    nums[j+1]=temp;
+                }
+
+            }
+        }
+        int largest=nums[nums.length-1];
+        return largest;
+    }
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[] = new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        Solution sol = new Solution();
+        int result=sol.largestElement(arr);
+        System.out.print(result);
+    }
+}

@@ -3,29 +3,46 @@ import java.util.*;
 class Solution {
     public int[] unionArray(int[] nums1, int[] nums2) {
         int i = 0, j = 0, k = 0;
-        int c = nums1.length + nums2.length;
+        int c = nums1.length + nums2.length;   // maximum possible size
         int[] nums3 = new int[c];
 
         while (i < nums1.length && j < nums2.length) {
             if (nums1[i] < nums2[j]) {
-                nums3[k++] = nums1[i++];
+                if (k == 0 || nums3[k - 1] != nums1[i]) {
+                    nums3[k++] = nums1[i];
+                }
+                i++;
             } else if (nums1[i] > nums2[j]) {
-                nums3[k++] = nums2[j++];
-            } else {
-                nums3[k++] = nums1[i];
+                if (k == 0 || nums3[k - 1] != nums2[j]) {
+                    nums3[k++] = nums2[j];
+                }
+                j++;
+            } else { // equal
+                if (k == 0 || nums3[k - 1] != nums1[i]) {
+                    nums3[k++] = nums1[i];
+                }
                 i++;
                 j++;
             }
         }
 
+        // copy remaining elements from nums1
         while (i < nums1.length) {
-            nums3[k++] = nums1[i++];
-        }
-        while (j < nums2.length) {
-            nums3[k++] = nums2[j++];
+            if (k == 0 || nums3[k - 1] != nums1[i]) {
+                nums3[k++] = nums1[i];
+            }
+            i++;
         }
 
-        return Arrays.copyOf(nums3, k);
+        // copy remaining elements from nums2
+        while (j < nums2.length) {
+            if (k == 0 || nums3[k - 1] != nums2[j]) {
+                nums3[k++] = nums2[j];
+            }
+            j++;
+        }
+
+        return Arrays.copyOf(nums3, k); // shrink array to actual size
     }
 
     public static void main(String[] args) {

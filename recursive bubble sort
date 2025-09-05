@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+    public int[] bubbleSort(int[] nums) {
+        sort(nums, nums.length);
+        return nums;
+    }
+
+    private void sort(int[] nums, int n) {
+        if (n == 1) return;
+        for (int j = 0; j < n - 1; j++) {
+            if (nums[j] > nums[j + 1]) {
+                int temp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = temp;
+            }
+        }
+        sort(nums, n - 1);
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); 
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        Solution sol = new Solution();
+        int[] sorted = sol.bubbleSort(arr);
+
+        for (int num : sorted) {
+            System.out.print(num + " ");
+        }
+    }
+}

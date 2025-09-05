@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        int minVal = nums[0], maxVal = nums[0];
+        for (int num : nums) {
+            minVal = Math.min(minVal, num);
+            maxVal = Math.max(maxVal, num);
+        }
+        int offset = -minVal;
+        int[] hash = new int[maxVal + offset + 1]; 
+        for (int num : nums) {
+            hash[num + offset]++;
+        }
+        for (int i = 0; i < hash.length; i++) {
+            if (hash[i] == 1) {
+                return i - offset;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        Solution sol = new Solution();
+        int result = sol.singleNumber(arr);
+        System.out.println(result);
+    }
+}

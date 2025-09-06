@@ -1,0 +1,31 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public void sortZeroOneTwo(int[] nums) {
+        for (int i = 0; i < nums.length- 1; i++) {
+            for (int j = 0; j < nums.length - i - 1; j++) {  
+                if (nums[j] > nums[j + 1]) {       
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
+            }
+        }
+    }
+     public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for(int i=0; i<n; i++){
+            arr[i] = sc.nextInt();
+        }
+        Solution sol = new Solution();
+        sol.sortZeroOneTwo(arr);
+
+        for(int i=0; i<n; i++){
+            System.out.print(arr[i] + " ");
+        }
+    }
+}

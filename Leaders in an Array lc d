@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+
+class Solution {
+    public List<Integer> leaders(int[] nums) {
+        int n = nums.length;
+        int maxfromright = Integer.MIN_VALUE;
+        List<Integer> leaderslist = new ArrayList<>();
+        for (int i = n - 1; i >= 0; i--) {
+            if (nums[i] > maxfromright) {
+                maxfromright = nums[i];
+                leaderslist.add(nums[i]);
+            }
+        }
+        Collections.reverse(leaderslist); 
+        return leaderslist;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        Solution s = new Solution();
+        List<Integer> ans = s.leaders(nums);
+        for (int num : ans) {
+            System.out.print(num + " ");
+        }
+    }
+}

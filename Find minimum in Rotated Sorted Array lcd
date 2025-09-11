@@ -1,0 +1,25 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+    public int findMin(ArrayList<Integer> arr) {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i) < min) {
+                min = arr.get(i);
+            }
+        }
+        return min;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+        Solution sol = new Solution();
+        System.out.println(sol.findMin(arr));
+    }
+}

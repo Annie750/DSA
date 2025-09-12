@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+
+   public static int minimumRateToEatBananas(int[] nums, int h) {
+        int total = 0;
+        int maxPile = 0;
+        for (int pile : nums) {
+            total += pile;
+            maxPile = Math.max(maxPile, pile);
+        }
+        int k = Math.max(1, total / h);
+        while (k <= maxPile) {
+            int hours = 0;
+            for (int pile : nums) {
+                hours += (pile + k - 1) / k;
+            }
+            if (hours <= h) {
+                return k;
+            }
+            k++;
+        }
+        return maxPile;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] piles = new int[n];
+        for (int i = 0; i < n; i++) {
+            piles[i] = sc.nextInt();
+        }
+        int h = sc.nextInt();
+        int minSpeed = minimumRateToEatBananas(piles, h);
+        System.out.println(minSpeed);
+    }
+}

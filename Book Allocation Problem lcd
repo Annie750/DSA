@@ -1,0 +1,57 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+import java.util.*;
+
+class Solution {
+    public int findPages(int[] nums, int m) {
+        int n = nums.length;
+        if (n < m) return -1;
+
+        int low = 0, high = 0;
+        for (int pages : nums) {
+            low = Math.max(low, pages); 
+            high += pages;              
+        }
+
+        int result = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (isPossible(nums, m, mid)) {
+                result = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return result;
+   }
+    private boolean isPossible(int[] nums, int m, int limit) {
+        int students = 1;
+        int pages = 0;
+
+        for (int book : nums) {
+            if (pages + book > limit) {
+                students++;
+                pages = book;
+                if (students > m) return false;
+            } else {
+                pages += book;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        int m = sc.nextInt();
+        Solution sol = new Solution();
+        int answer = sol.findPages(nums, m);
+        System.out.println(answer);
+    }
+}

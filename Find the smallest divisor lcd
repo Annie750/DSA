@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int left = 1;
+        int right = Arrays.stream(nums).max().getAsInt();
+        int ans = right;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (canDivide(nums, threshold, mid)) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+    private boolean canDivide(int[] nums, int threshold, int divisor) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += (num + divisor - 1) / divisor;
+            if (sum > threshold) return false;
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+                for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        int threshold = sc.nextInt();
+        Solution sol = new Solution();
+        int result = sol.smallestDivisor(nums, threshold);
+        System.out.println(result);
+
+        sc.close();
+    }
+}

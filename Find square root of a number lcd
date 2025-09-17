@@ -1,0 +1,20 @@
+import java.util.*;
+
+class Solution {
+    public long floorSqrt(long n) {
+        long ans = 0;
+        for (long i = 1; i * i <= n; i++) {
+            ans = i;
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        Solution sol = new Solution();
+        long ans = sol.floorSqrt(n);
+        System.out.println(ans);
+        sc.close();
+    }
+}

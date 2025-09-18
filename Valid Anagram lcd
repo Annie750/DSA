@@ -1,0 +1,23 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+class Solution {
+    public boolean anagramStrings(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        return Arrays.equals(sArr, tArr);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        String t = sc.nextLine();
+        Solution sol = new Solution();
+        boolean result = sol.anagramStrings(s, t);
+        System.out.println(result);
+    }
+}

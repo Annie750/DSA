@@ -1,0 +1,55 @@
+import java.util.*;
+
+class Solution {
+    public int roseGarden(int n, int[] nums, int k, int m) {
+        if (m * k > n) return -1;
+        int left = 1;
+        int right = Arrays.stream(nums).max().getAsInt();
+        int result = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (canMake(nums, m, k, mid)) {
+                result = mid;       
+                right = mid - 1;    
+            } else {
+                left = mid + 1;     
+            }
+        }
+        return result;
+    }
+   private boolean canMake(int[] bloomDay, int m, int k, int day) {
+        int bouquets = 0;
+        int consecutive = 0;
+        for (int b : bloomDay) {
+            if (b <= day) {
+                consecutive++;
+                if (consecutive == k) {
+                    bouquets++;
+                    consecutive = 0;                }
+            } else {
+                consecutive = 0;             }
+        }
+        return bouquets >= m;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter n: ");
+        int n = sc.nextInt();
+
+        int[] nums = new int[n];
+        System.out.println("Enter bloom days:");
+        for (int i = 0; i < n; i++) nums[i] = sc.nextInt();
+
+        System.out.print("Enter k (roses per bouquet): ");
+        int k = sc.nextInt();
+        System.out.print("Enter m (number of bouquets): ");
+        int m = sc.nextInt();
+
+        Solution sol = new Solution();
+        int ans = sol.roseGarden(n, nums, k, m);
+        System.out.println("Minimum days required: " + ans);
+    }
+}
+
+

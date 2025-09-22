@@ -1,0 +1,48 @@
+import java.util.*;
+
+class Solution {
+    public String frequencySort(String s) {
+        // 1. Count frequency of each character
+        Map<Character, Integer> freqMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
+        }
+
+        // 2. Create a list of characters to sort
+        List<Character> chars = new ArrayList<>();
+        for (char c : freqMap.keySet()) {
+            chars.add(c);
+        }
+
+        // 3. Sort by frequency descending, then alphabetically ascending
+        Collections.sort(chars, (a, b) -> {
+            int freqCompare = freqMap.get(b) - freqMap.get(a); // high -> low
+            if (freqCompare == 0) {
+                return a - b; // alphabetical order for tie
+            }
+            return freqCompare;
+        });
+
+        // 4. Build the final string
+        StringBuilder sb = new StringBuilder();
+        for (char c : chars) {
+            int count = freqMap.get(c);
+            for (int i = 0; i < count; i++) {
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
+    }
+
+    // Test with input
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = sc.nextLine();
+
+        Solution sol = new Solution();
+        String result = sol.frequencySort(s);
+        System.out.println("Sorted by frequency: " + result);
+    }
+}

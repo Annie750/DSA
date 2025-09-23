@@ -1,0 +1,35 @@
+class Solution {
+    public int myAtoi(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        s = s.trim();
+        if (s.isEmpty()) return 0;
+        int sign = 1;
+        int i = 0;
+        if (s.charAt(0) == '-') {
+            sign = -1;
+            i++;
+        } else if (s.charAt(0) == '+') {
+            i++;
+        }
+        long count = 0;
+        for (; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (!Character.isDigit(c)) break; 
+            int digit = c - '0';
+            count = count * 10 + digit;
+            if (sign == 1 && count > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            if (sign == -1 && -count < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        }
+       return (int)(sign * count);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter string to convert: ");
+        String input = sc.nextLine();
+        Solution sol = new Solution();
+        int result = sol.myAtoi(input);
+        System.out.println("Converted integer: " + result);
+        sc.close();
+    }
+}
+

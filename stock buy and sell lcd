@@ -1,0 +1,26 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) return 0;
+
+        int min = prices[0];
+        int max = prices[0];
+        int maxProfit = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < min) {
+                // Reset window if new min found
+                min = prices[i];
+                max = prices[i];
+            } else if (prices[i] > max) {
+                // Extend max if price rises
+                max = prices[i];
+                maxProfit = Math.max(maxProfit, max - min);
+            } else {
+                // Even if price isn’t higher than max, check profit against min
+                maxProfit = Math.max(maxProfit, prices[i] - min);
+            }
+        }
+
+        return maxProfit;
+    }
+}

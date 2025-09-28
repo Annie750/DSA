@@ -1,0 +1,35 @@
+class Solution {
+    public int paint(int A, int B, int[] C) {
+        long low = 0, high = 0;
+        int MOD = 100000;
+        for (int len : C) {
+            low = Math.max(low, len);
+            high += len;
+        }
+        while (low < high) {
+            long mid = low + (high - low) / 2;
+            if (canPaint(C, A, mid)) {
+                high = mid; 
+            } else {
+                low = mid + 1;
+            }
+        }
+        long result = (low % MOD * B % MOD) % MOD;
+        return (int) result;
+    }
+    private boolean canPaint(int[] C, int painters, long maxLoad) {
+        long total = 0;
+        int paintersUsed = 1;
+        for (int len : C) {
+            if (total + len > maxLoad) {
+                paintersUsed++;
+                total = len;
+                if (paintersUsed > painters) return false;
+            } else {
+                total += len;
+            }
+        }
+
+        return true;
+    }
+}

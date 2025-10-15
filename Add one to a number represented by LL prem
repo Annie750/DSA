@@ -1,0 +1,47 @@
+/*Definition of singly linked list:
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
+        val = 0;
+        next = null;
+    }
+
+    ListNode(int data1) {
+        val = data1;
+        next = null;
+    }
+
+    ListNode(int data1, ListNode next1) {
+        val = data1;
+        next = next1;
+    }
+}
+ */
+
+class Solution {
+    public ListNode addOne(ListNode head) {
+        int carry = addWithCarry(head);
+
+        if (carry > 0) {
+            ListNode newNode = new ListNode(carry);
+            newNode.next = head;
+            head = newNode;
+        }
+
+        return head;
+    }
+
+    private int addWithCarry(ListNode node) {
+        if (node == null) {
+            return 1;
+        }
+
+        int carry = addWithCarry(node.next);
+        int sum = node.val + carry;
+
+        node.val = sum % 10;
+        return sum / 10;
+    }
+}

@@ -1,0 +1,47 @@
+/*Definition of doubly linked list:
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode prev;
+
+    ListNode() {
+        val = 0;
+        next = null;
+        prev = null;
+    }
+
+    ListNode(int data1) {
+        val = data1;
+        next = null;
+        prev = null;
+    }
+
+    ListNode(int data1, ListNode next1, ListNode prev1) {
+        val = data1;
+        next = next1;
+        prev = prev1;
+    }
+}
+ */
+
+class Solution {
+    public ListNode deleteAllOccurrences(ListNode head, int target) {
+        if (head == null) return null;
+
+        ListNode current = head;
+        while (current != null) {
+            if (current.val == target) {
+                // If current is head
+                if (current == head) {
+                    head = current.next;
+                    if (head != null) head.prev = null;
+                } else {
+                    current.prev.next = current.next;
+                    if (current.next != null) current.next.prev = current.prev;
+                }
+            }
+            current = current.next;
+        }
+        return head;
+    }
+}

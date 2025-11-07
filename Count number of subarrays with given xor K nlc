@@ -1,0 +1,27 @@
+import java.util.HashMap;
+
+class Solution {
+    public int subarraysWithXorK(int[] nums, int k) {
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        int xor = 0;
+        int count = 0;
+
+        for (int num : nums) {
+            xor ^= num;  // prefix XOR till now
+
+            // Case 1: if XOR itself equals k, count one subarray
+            if (xor == k)
+                count++;
+
+            // Case 2: check if there's a prefix XOR that makes current XOR == k
+            int required = xor ^ k;
+            if (freq.containsKey(required))
+                count += freq.get(required);
+
+            // Update frequency map
+            freq.put(xor, freq.getOrDefault(xor, 0) + 1);
+        }
+
+        return count;
+    }
+}

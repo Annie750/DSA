@@ -1,0 +1,17 @@
+class Solution {
+    public List<List<Integer>> powerSet(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(result, new ArrayList<>(), nums, 0);
+        return result;
+    }
+    
+    private void backtrack(List<List<Integer>> result, List<Integer> temp, int[] nums, int start) {
+        result.add(new ArrayList<>(temp));  // add current subset
+        
+        for (int i = start; i < nums.length; i++) {
+            temp.add(nums[i]);                // choose element
+            backtrack(result, temp, nums, i + 1);  // explore further
+            temp.remove(temp.size() - 1);     // un-choose element (backtrack)
+        }
+    }
+}

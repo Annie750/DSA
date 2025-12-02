@@ -1,0 +1,9 @@
+class Solution {
+    public boolean checkIthBit(int n, int i) {
+        int y=n>>i;
+        if((y&1)==0){
+            return false;
+    }
+    else{
+        return true;
+    }}}

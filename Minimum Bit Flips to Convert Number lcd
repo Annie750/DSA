@@ -1,0 +1,10 @@
+class Solution {
+    public int minBitsFlip(int start, int goal) {
+        int y = start^goal;
+        int count=0;
+        while(y!=0){
+            y=y&(y-1);
+            count++;
+        }
+        return count;
+    }}

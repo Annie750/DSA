@@ -1,0 +1,30 @@
+class Solution {
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        
+        int n = arr.length;
+        int q = queries.length;
+        
+        // prefix XOR: O(n)
+        int[] prefix = new int[n];
+        prefix[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] ^ arr[i];
+        }
+        
+        int[] ans = new int[q];
+        
+        // answer each query in O(1)
+        for (int p = 0; p < q; p++) {
+            int i = queries[p][0];
+            int j = queries[p][1];
+            
+            if(i == 0){
+                ans[p] = prefix[j];
+            } else {
+                ans[p] = prefix[j] ^ prefix[i - 1];
+            }
+        }
+        
+        return ans;
+    }
+}

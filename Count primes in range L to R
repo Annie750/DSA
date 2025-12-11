@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Solution {
+    public ArrayList<Integer> primesInRange(ArrayList<int[]> queries) {
+        int MAX = 100000;
+
+        // Step 1: Sieve to mark primes
+        boolean[] isPrime = new boolean[MAX + 1];
+        Arrays.fill(isPrime, true);
+        isPrime[0] = false;
+        isPrime[1] = false;
+
+        for (int i = 2; i * i <= MAX; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= MAX; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        // Step 2: Build prefix prime count array
+        int[] prefix = new int[MAX + 1];
+        for (int i = 1; i <= MAX; i++) {
+            prefix[i] = prefix[i - 1] + (isPrime[i] ? 1 : 0);
+        }
+
+        // Step 3: Answer queries
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int[] q : queries) {
+            int L = q[0];
+            int R = q[1];
+            int count = prefix[R] - (L > 1 ? prefix[L - 1] : 0);
+            result.add(count);
+        }
+
+        return result;
+    }
+}

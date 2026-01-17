@@ -1,0 +1,65 @@
+import java.util.*;
+
+class ArrayStack {
+    int[] arr;
+    int top=-1;
+
+    public ArrayStack() {
+        arr = new int[20];
+        top = -1;
+    }
+
+    public void push(int x) {
+        top++;
+        arr[top] = x;
+    }
+
+    public int pop() {
+    int val = arr[top];
+    top--;
+    return val;
+}
+
+
+    public int top() {
+        return arr[top];
+    }
+
+    public boolean isEmpty() {
+        if (top == -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // ===== INPUT TAKING FUNCTION =====
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();   // number of operations
+        sc.nextLine();
+
+        ArrayStack st = new ArrayStack();
+
+        for (int i = 0; i < n; i++) {
+            String op = sc.nextLine();
+
+            if (op.equals("push")) {
+                int val = sc.nextInt();
+                sc.nextLine();
+                st.push(val);
+            } 
+            else if (op.equals("pop")) {
+                System.out.println(st.pop());
+            } 
+            else if (op.equals("top")) {
+                System.out.println(st.top());
+            } 
+            else if (op.equals("isEmpty")) {
+                System.out.println(st.isEmpty());
+            }
+        }
+        sc.close();
+    }
+}

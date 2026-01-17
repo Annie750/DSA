@@ -1,0 +1,32 @@
+
+class QueueStack {
+    int[] q = new int[1000];
+    int[] newq = new int[1000];
+    int front, rear;
+
+    public QueueStack() {
+        front = -1;
+        rear = -1;
+    }
+
+    public void push(int x) {
+        rear++;
+        front++;
+        newq[front] = x;   // stack top stored here
+        q[rear] = x;       // keeping your queue array idea
+    }
+
+    public int pop() {
+        int val = newq[front];
+        front--;           // IMPORTANT: move backward
+        if (front < 0) rear = -1; // reset when empty
+        return val;
+    }
+
+    public int top() {
+        return newq[front];
+    }
+
+    public boolean isEmpty() {
+        return front == -1;
+    }}

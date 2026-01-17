@@ -1,0 +1,30 @@
+
+class ArrayQueue {
+    int[] arr;
+    int front, rear;
+
+    public ArrayQueue() {
+        arr = new int[20];
+        front = rear = -1;
+    }
+
+    public void push(int x) {
+        rear++;
+        arr[rear] = x;
+        if (front == -1) front = 0;
+    }
+
+    public int pop() {
+        int val = arr[front];
+        front++;
+        return val;
+    }
+
+    public int peek() {
+        return arr[front];
+    }
+
+    public boolean isEmpty() {
+        return front > rear || front == -1;
+    }
+}

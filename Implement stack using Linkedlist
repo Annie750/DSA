@@ -1,0 +1,36 @@
+class LinkedListStack {
+
+    private static class Node {
+        int data;
+        Node next;
+        Node(int data) { this.data = data; }
+    }
+
+    private Node top; // points to the top node of the stack
+
+    public LinkedListStack() {
+        top = null; // empty stack initially
+    }
+
+    public void push(int x) {
+        Node newNode = new Node(x);
+        newNode.next = top;
+        top = newNode;
+    }
+
+    public int pop() {
+        if (isEmpty()) throw new RuntimeException("Stack is empty");
+        int val = top.data;
+        top = top.next;
+        return val;
+    }
+
+    public int top() {
+        if (isEmpty()) throw new RuntimeException("Stack is empty");
+        return top.data;
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+}

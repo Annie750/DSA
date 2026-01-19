@@ -1,0 +1,12 @@
+class Solution {
+    List<Integer> l = new ArrayList<>();
+    public List<Integer> inorder(TreeNode node) {
+        if (node==null) {
+            return l;
+        }
+        inorder(node.left);
+        l.add(node.data);
+        inorder(node.right);
+        return l;
+    }
+}

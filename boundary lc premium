@@ -1,0 +1,45 @@
+class Solution {
+    List<Integer> res = new ArrayList<>();
+
+    public List<Integer> boundary(TreeNode root) {
+        if (root == null) return res;
+
+        res.add(root.data);               
+        addLeft(root.left);               
+        addLeaves(root.left);
+        addLeaves(root.right);            
+        addRight(root.right);             
+
+        return res;
+    }
+
+    private void addLeft(TreeNode node) {
+        while (node != null) {
+            if (!isLeaf(node)) res.add(node.data);
+            node = (node.left != null) ? node.left : node.right;
+        }
+    }
+
+    private void addRight(TreeNode node) {
+        Stack<Integer> st = new Stack<>();
+        while (node != null) {
+            if (!isLeaf(node)) st.push(node.data);
+            node = (node.right != null) ? node.right : node.left;
+        }
+        while (!st.isEmpty()) res.add(st.pop());
+    }
+
+    private void addLeaves(TreeNode node) {
+        if (node == null) return;
+        if (isLeaf(node)) {
+            res.add(node.data);
+            return;
+        }
+        addLeaves(node.left);
+        addLeaves(node.right);
+    }
+
+    private boolean isLeaf(TreeNode node) {
+        return node.left == null && node.right == null;
+    }
+}

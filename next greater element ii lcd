@@ -1,0 +1,50 @@
+import java.util.*;
+
+class Solution {
+
+    public int[] nextGreaterElements(int[] arr) {
+
+        int n = arr.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+
+        Stack<Integer> st = new Stack<>();
+
+        System.out.println("DEBUG: Input = " + Arrays.toString(arr));
+
+        // Traverse twice for circular effect
+        for (int i = 2 * n - 1; i >= 0; i--) {
+
+            int idx = i % n;
+            System.out.println("\nDEBUG: i = " + i + ", idx = " + idx + ", value = " + arr[idx]);
+            System.out.println("DEBUG: Stack before = " + st);
+
+            while (!st.isEmpty() && st.peek() <= arr[idx]) {
+                System.out.println("DEBUG: Popping " + st.peek());
+                st.pop();
+            }
+
+            if (i < n) { // fill answer only in first pass
+                ans[idx] = st.isEmpty() ? -1 : st.peek();
+                System.out.println("DEBUG: ans[" + idx + "] = " + ans[idx]);
+            }
+
+            st.push(arr[idx]);
+            System.out.println("DEBUG: Stack after = " + st);
+        }
+
+        System.out.println("\nDEBUG: Final Answer = " + Arrays.toString(ans));
+        return ans;
+    }
+
+    // ✅ ONLINE COMPILER ENTRY POINT
+    public static void main(String[] args) {
+
+        int[] arr = {3, 10, 4, 2, 1, 2, 6, 1, 7, 2, 9};
+
+        Solution sol = new Solution();
+        int[] res = sol.nextGreaterElements(arr);
+
+        System.out.println("\nOUTPUT: " + Arrays.toString(res));
+    }
+}

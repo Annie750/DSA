@@ -1,0 +1,54 @@
+import java.util.*;
+
+class Solution {
+
+    public int strStr(String haystack, String needle) {
+
+        if (needle.length() == 0) return 0;
+        if (needle.length() > haystack.length()) return -1;
+
+        int i = 0;
+        int j = 0;
+
+        System.out.println("Haystack: " + haystack);
+        System.out.println("Needle  : " + needle);
+        System.out.println("---------------------");
+
+        while (i < haystack.length()) {
+
+            // guard condition — CRITICAL
+            if (j < needle.length() && haystack.charAt(i) == needle.charAt(j)) {
+
+                System.out.println("Match at i=" + i + ", j=" + j);
+
+                if (j == needle.length() - 1) {
+                    System.out.println("Full match found");
+                    return i - j;
+                }
+
+                i++;
+                j++;
+
+            } else {
+
+                System.out.println("Mismatch → backtracking");
+
+                i = i - j + 1;
+                j = 0;
+            }
+        }
+
+        return -1;
+    }}
+    class Main{
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String haystack = sc.nextLine();
+        String needle = sc.nextLine();
+
+        Solution sol = new Solution();
+        System.out.println(sol.strStr(haystack, needle));
+    }
+}

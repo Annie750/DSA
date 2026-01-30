@@ -1,0 +1,48 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Solution {
+
+    public int[] shuffle(int[] nums, int n) {
+        int[] result = new int[nums.length];
+        int j = 0;
+        int k = n;
+
+        System.out.println("Initial j = " + j + ", k = " + k);
+        System.out.println("Nums: " + Arrays.toString(nums));
+
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println("\nIteration i = " + i);
+
+            if (i % 2 == 0) {
+                System.out.println("Even index → taking nums[" + j + "]");
+                result[i] = nums[j];
+                j++;
+            } else {
+                System.out.println("Odd index → taking nums[" + k + "]");
+                result[i] = nums[k];
+                k++;
+            }
+
+            System.out.println("Result so far: " + Arrays.toString(result));
+            System.out.println("j = " + j + ", k = " + k);
+        }
+
+        return result;
+    }
+
+    // -------- DRIVER CODE --------
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // INPUT
+        int[] nums = {2, 5, 1, 3, 4, 7};
+        int n = 3;
+
+        int[] ans = sol.shuffle(nums, n);
+
+        System.out.println("\nFinal Output:");
+        System.out.println(Arrays.toString(ans));
+    }
+}

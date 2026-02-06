@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class Solution {
+    public static int characterReplacement(String s, int k) {
+        int[] freq = new int[26];
+
+        int left = 0;
+        int maxFreq = 0;
+        int ans = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char ch = s.charAt(right);
+            freq[ch - 'A']++;
+
+            maxFreq = Math.max(maxFreq, freq[ch - 'A']);
+
+            // DEBUG: after expanding window
+            System.out.println("Added char: " + ch);
+            System.out.println("Window before shrink: [" + left + ", " + right + "]");
+            System.out.println("Window size: " + (right - left + 1));
+            System.out.println("Max frequency: " + maxFreq);
+            System.out.println("Replacements needed: " + ((right - left + 1) - maxFreq));
+
+            // shrink window if invalid
+            while ((right - left + 1) - maxFreq > k) {
+                char remove = s.charAt(left);
+                freq[remove - 'A']--;
+                left++;
+
+                System.out.println("❌ Shrinking window, removed: " + remove);
+                System.out.println("New left pointer: " + left);
+            }
+
+            ans = Math.max(ans, right - left + 1);
+
+            System.out.println("✅ Valid window length now: " + (right - left + 1));
+            System.out.println("----------------------------------");
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter string (uppercase only): ");
+        String s = sc.next();
+
+        System.out.print("Enter k: ");
+        int k = sc.nextInt();
+
+        int result = characterReplacement(s, k);
+        System.out.println("Final Answer: " + result);
+    }
+}

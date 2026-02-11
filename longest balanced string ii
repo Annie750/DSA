@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Solution {
+    public int longestBalanced(int[] nums) {
+
+        HashSet<Integer> seen = new HashSet<>();
+        HashMap<Integer, Integer> firstIndex = new HashMap<>();
+
+        int diff = 0;
+        int maxLen = 0;
+
+        firstIndex.put(0, -1);
+
+        for (int i = 0; i < nums.length; i++) {
+
+            if (!seen.contains(nums[i])) {
+                seen.add(nums[i]);
+
+                if (nums[i] % 2 == 0) diff++;
+                else diff--;
+            }
+
+            if (firstIndex.containsKey(diff)) {
+                maxLen = Math.max(maxLen, i - firstIndex.get(diff));
+            } else {
+                firstIndex.put(diff, i);
+            }
+        }
+
+        return maxLen;
+    }
+}

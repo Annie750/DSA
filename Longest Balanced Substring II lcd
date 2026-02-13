@@ -1,0 +1,24 @@
+class Solution {
+    public int longestBalanced(String s) {
+        Map<String, Integer> map = new HashMap<>();
+        int countA = 0, countB = 0, countC = 0;
+        int maxLen = 0;
+        map.put("0#0", -1);
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == 'a') countA++;
+            else if (ch == 'b') countB++;
+            else countC++;
+            int d1 = countA - countB;
+            int d2 = countB - countC;
+            String key = d1 + "#" + d2;
+            if (map.containsKey(key)) {
+                int prevIndex = map.get(key);
+                maxLen = Math.max(maxLen, i - prevIndex);
+            } else {
+                map.put(key, i);
+            }
+        }
+        return maxLen;
+    }
+}

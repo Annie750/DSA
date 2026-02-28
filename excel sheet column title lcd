@@ -1,0 +1,20 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        StringBuilder result = new StringBuilder();
+
+        while (columnNumber > 0) {
+            // Step 1: Adjust for 1-based indexing
+            columnNumber--;
+
+            // Step 2: Find the character (remainder + 'A')
+            char currentChar = (char) ('A' + (columnNumber % 26));
+            result.append(currentChar);
+
+            // Step 3: Divide to move to the next position
+            columnNumber /= 26;
+        }
+
+        // Step 4: The characters were added from right to left, so reverse it
+        return result.reverse().toString();
+    }
+}

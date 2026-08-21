@@ -1,0 +1,34 @@
+class Solution {
+    public int search(int[] nums, int target) {
+
+        int n = nums.length;
+        int left = 0;
+        int right = n - 1;
+
+        while (left < right) {
+
+            int mid = (left + right) / 2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        int k = left;   // index of minimum element
+  left = 0;
+        right = n - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            int rotatedIndex = (mid + k) % n;
+            if (nums[rotatedIndex] == target) {
+                return rotatedIndex;
+            }
+            if (nums[rotatedIndex] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
